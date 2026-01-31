@@ -40,26 +40,47 @@ This skill enables AI clinical instructor agents to guide Doctor of Physical The
 
 ### Installation
 
-**Option 1: Clone to Letta Skills Directory**
+**Option 1: Clone Directly into Your Letta Project** ⭐ Easiest!
+```bash
+# Navigate to your Letta project directory
+cd /path/to/your/letta-project
+
+# Clone this repository
+git clone https://github.com/sternb12/patient_interview.git
+
+# The .skills/ directory is ready to use!
+# Just verify:
+ls .skills/patient_interview/SKILL.md
+
+# Start Letta and the skill will be discovered automatically
+letta
+```
+
+**Option 2: Copy to Global Letta Skills Directory**
 ```bash
 # Clone this repository
 git clone https://github.com/sternb12/patient_interview.git
 
-# Copy to your Letta skills directory
-cp -r patient_interview/skills/patient_interview ~/.letta/skills/
+# Copy to your global Letta skills directory
+cp -r patient_interview/.skills/patient_interview ~/.letta/skills/
 
 # Verify installation
 letta
 # The skill should appear in your available skills
 ```
 
-**Option 2: Clone to Project-Specific Directory**
+**Option 3: Symlink for Development** (Keeps repo in sync)
 ```bash
-# In your Letta project directory
-mkdir -p .skills
-cd .skills
+# Clone this repository
 git clone https://github.com/sternb12/patient_interview.git
-cp -r patient_interview/skills/patient_interview ./
+
+# Create symlink to global skills directory
+ln -s "$(pwd)/patient_interview/.skills/patient_interview" ~/.letta/skills/patient_interview
+
+# Or symlink to project-specific directory
+cd /path/to/your/letta-project
+mkdir -p .skills
+ln -s /path/to/patient_interview/.skills/patient_interview .skills/patient_interview
 ```
 
 ### Usage
@@ -85,27 +106,38 @@ Agent: [Loads patient_interview skill]
 Skill(command="unload", skills=["patient_interview"])
 ```
 
-## Skill Contents
+## Repository Structure
 
 ```
-skills/patient_interview/
-├── SKILL.md (28KB)              # Main skill instructions
-│   ├── YAML frontmatter
-│   ├── Research foundation
-│   ├── 5-Level Socratic Ladder
-│   ├── Complete ECHOWS framework (42 points)
-│   ├── Course content integration
-│   └── Progressive teaching examples
+patient_interview/
+├── .skills/                     # ⭐ Ready-to-use Letta skills directory
+│   └── patient_interview/
+│       ├── SKILL.md (28KB)              # Main skill instructions
+│       │   ├── YAML frontmatter
+│       │   ├── Research foundation
+│       │   ├── 5-Level Socratic Ladder
+│       │   ├── Complete ECHOWS framework (42 points)
+│       │   ├── Course content integration
+│       │   └── Progressive teaching examples
+│       │
+│       ├── README.md (4.5KB)            # Skill overview
+│       ├── NEXT_STEPS.md (9.5KB)        # Implementation & testing guide
+│       │
+│       ├── examples/
+│       │   └── worked_scenarios.md (18KB)  # 4 detailed teaching scenarios
+│       │
+│       └── references/
+│           └── echows_quick_ref.md (6.5KB) # Quick reference checklist
 │
-├── README.md (4.5KB)            # Skill overview
-├── NEXT_STEPS.md (9.5KB)        # Implementation & testing guide
+├── skills/                      # Source directory (same content as .skills/)
+│   └── patient_interview/
 │
-├── examples/
-│   └── worked_scenarios.md (18KB)  # 4 detailed teaching scenarios
-│
-└── references/
-    └── echows_quick_ref.md (6.5KB) # Quick reference checklist
+├── README.md                    # This file
+├── LICENSE                      # Apache 2.0
+└── .gitignore                   # Standard exclusions
 ```
+
+**Note**: Both `.skills/` and `skills/` contain the same skill content. Use `.skills/` for direct Letta integration, or `skills/` for viewing/browsing on GitHub.
 
 ## Teaching Approach: 5-Level Socratic Ladder
 
